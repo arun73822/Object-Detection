@@ -1,0 +1,11 @@
+training_pipeline_config:
+  pipeline_name: src/Object_Detection
+  artifact_dir: artifact_dir
+
+data_ingestion_config:
+  data_ingestion_dir: data_ingestion
+  dataset_download_url: "https://github.com/arun73822/Object_Detection_Yolov5/raw/master/Sign_language_data.zip"
+  raw_data_dir: raw_data
+  extracted_data_dir: extracted_data
+  ingested_train_data_dir: ingested_train_data
+  ingested_test_data_dir: ingested_test_data
