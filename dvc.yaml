@@ -21,4 +21,5 @@ stages:
   
   stage_04_model_training:
     cmd: python src/Object_Detection/artifact_dir/prepare_base_model/base_model/train.py --img 416 --batch 16 --epochs 1 --data 'C:/Users/arun7/Desktop/projects/Computer_Vision/Object_Detection/src/Object_Detection/artifact_dir/data_ingestion/extracted_data/data.yaml' --cfg src/Object_Detection/artifact_dir/prepare_base_model/base_model/models/Custom_Yolov5s.yaml --weights 'yolov5s.pt' --name yolov5s_results  --cache
-  
+  stage_05_inferencing:
+    cmd: python src/Object_Detection/artifact_dir/prepare_base_model/base_model/detect.py --weights src/Object_Detection/artifact_dir/prepare_base_model/base_model/runs/train/yolov5s_results/weights/best.pt --img 416 --conf 0.5 --source C:/Users/arun7/Desktop/projects/Computer_Vision/Object_Detection/src/Object_Detection/artifact_dir/data_ingestion/ingested_test_data/images
