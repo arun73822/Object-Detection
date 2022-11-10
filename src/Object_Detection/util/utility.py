@@ -27,3 +27,10 @@ def read_yaml_file(file_path:Path)->ConfigBox:
         raise ValueError("yaml file is empty")
     except Exception as e:
         raise e
+
+def write_yaml_file(file_path,data):
+    try:
+        with open(file_path,"w") as file:
+            yaml.dump(data,file)
+    except Exception as e:
+        raise e

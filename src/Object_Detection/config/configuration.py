@@ -1,5 +1,5 @@
 from Object_Detection import logger
-from Object_Detection.entity.config_entity import Training_Pipeline_Config,Data_Ingestion_Config
+from Object_Detection.entity.config_entity import Training_Pipeline_Config,Data_Ingestion_Config,Prepare_Base_Model_Config
 from Object_Detection.util.utility import read_yaml_file
 from Object_Detection.constants import *
 from pathlib import Path
@@ -63,5 +63,34 @@ class Configuration:
             )
             logger.info(f"Data Ingestion config: {data_ingestion_config}")
             return data_ingestion_config
+        except Exception as e:
+            raise e
+    
+    def get_prepare_base_model_config(self)->Prepare_Base_Model_Config:
+        try:
+            artifact_dir=self.traning_pipeline_config.artifact_dir
+            prepare_base_model_config_info=self.config_info.prepare_base_model_config
+            prepare_base_model_config_dir=os.path.join(artifact_dir,
+                                            prepare_base_model_config_info.prepare_base_model_dir)
+            base_model_dir=os.path.join(prepare_base_model_config_dir,
+                                        prepare_base_model_config_info.base_model_dir)
+            base_model_file_name=prepare_base_model_config_info.base_model_file_name
+            updated_model_dir=os.path.join(prepare_base_model_config_dir,
+                                           prepare_base_model_config_info.updated_model_dir)
+            updated_model_file_name=prepare_base_model_config_info.updated_model_file_name
+            updated_model_file_path=os.path.join(updated_model_dir,updated_model_file_name)
+            params_number_of_classes=NUMBER_OF_CLASSES
+            github_url=prepare_base_model_config_info.Yolov5_github_url
+            prepare_base_model_config=Prepare_Base_Model_Config(
+                                                prepare_base_model_dir=Path(prepare_base_model_config_dir),
+                                                base_model_dir=Path(base_model_dir),
+                                                base_model_file_name=base_model_file_name,
+                                                updated_model_dir=Path(updated_model_dir),
+                                                updated_model_file_name=updated_model_file_name,
+                                                updated_model_file_path=Path(updated_model_file_path),
+                                                params_number_of_classes=params_number_of_classes,
+                                                Yolov5_github_url=github_url)
+            logger.info(f"Prepare Model Config: {prepare_base_model_config}")
+            return prepare_base_model_config
         except Exception as e:
             raise e
