@@ -6,24 +6,22 @@ from pathlib import Path
 
 class Configuration:
     
-    def __init__(
-        self, config_file_path=CONFIG_FILE_PATH):
+    def __init__(self,config_file_path=CONFIG_FILE_PATH):
         try:
-            self.config_info = read_yaml_file(file_path=Path(config_file_path))
-            self.traning_pipeline_config = self.get_traning_pipeline_config()
+            self.config_info=read_yaml_file(file_path=Path(config_file_path))
+            self.training_pipeline_config=self.get_training_pipeline_config()
         except Exception as e:
             raise e
 
-    def get_traning_pipeline_config(self) -> Training_Pipeline_Config:
+    def get_training_pipeline_config(self)->Training_Pipeline_Config:
         try:
-            training_pipeline_config_info = self.config_info.training_pipeline_config
+            training_pipeline_config_info=self.config_info.training_pipeline_config
             artifact_dir = os.path.join(
                 ROOT_DIR,
                 training_pipeline_config_info.pipeline_name,
                 training_pipeline_config_info.artifact_dir)
 
-            training_pipeline_config = Training_Pipeline_Config(
-                artifact_dir=Path(artifact_dir))
+            training_pipeline_config = Training_Pipeline_Config(artifact_dir=Path(artifact_dir))
 
             logger.info(f"Training pipleine config: {training_pipeline_config}")
             return training_pipeline_config
@@ -32,8 +30,8 @@ class Configuration:
 
     def get_data_ingestion_config(self) -> Data_Ingestion_Config:
         try:
-            data_ingestion_config_info = self.config_info.data_ingestion_config
-            artifact_dir = self.traning_pipeline_config.artifact_dir
+            data_ingestion_config_info = self.config_info.data_ingestion_config 
+            artifact_dir = self.training_pipeline_config.artifact_dir
             data_ingestion_artifact_dir = os.path.join(
                 artifact_dir, data_ingestion_config_info.data_ingestion_dir
             )
@@ -68,8 +66,8 @@ class Configuration:
     
     def get_prepare_base_model_config(self)->Prepare_Base_Model_Config:
         try:
-            artifact_dir=self.traning_pipeline_config.artifact_dir
-            prepare_base_model_config_info=self.config_info.prepare_base_model_config
+            artifact_dir=self.training_pipeline_config.artifact_dir
+            prepare_base_model_config_info=self.config_info.prepare_base_model_config  # type: ignore
             prepare_base_model_config_dir=os.path.join(artifact_dir,
                                             prepare_base_model_config_info.prepare_base_model_dir)
             base_model_dir=os.path.join(prepare_base_model_config_dir,

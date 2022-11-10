@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 data
 object_detection_env
+artifact_dir
 .vscode

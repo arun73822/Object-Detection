@@ -1,7 +1,7 @@
 from Object_Detection import logger
 from Object_Detection.entity.config_entity import Prepare_Base_Model_Config
 from Object_Detection.entity.config_artifact import Prepare_Base_Model_Artifact
-from Object_Detection.util.utility import read_yaml_file,write_yaml_file
+from Object_Detection.util.utility import read_yaml_file,write_yaml_file,read_file
 from git.repo.base import Repo
 from pathlib import Path
 import os
@@ -25,7 +25,7 @@ class Prepare_Base_Model:
     
     def update_yolo_model(self,base_model_path,update_model_path):
         try:
-            content=read_yaml_file(file_path=base_model_path)
+            content=read_file(file_path=base_model_path)
             logger.info("Successfully read the base yolo5s model")
             content["nc"]=6
             write_yaml_file(file_path=update_model_path,data=content)  # type: ignore

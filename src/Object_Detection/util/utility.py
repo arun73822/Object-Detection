@@ -34,3 +34,11 @@ def write_yaml_file(file_path,data):
             yaml.dump(data,file)
     except Exception as e:
         raise e
+
+def read_file(file_path):
+    try:
+        with open(file_path,"r") as file:
+            data=yaml.safe_load(file)
+            return data
+    except Exception as e:
+        raise e
