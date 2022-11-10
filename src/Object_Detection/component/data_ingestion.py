@@ -53,7 +53,6 @@ class Data_Ingestion:
             with ZipFile(raw_data_path) as file:
                 file.extractall(extracted_data_dir)
             logger.info(f"Extraction completed")
-            print(str(extracted_data_dir) + "\train")
             return extracted_data_dir
         except Exception as e:
             raise e
