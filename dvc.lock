@@ -1,0 +1,32 @@
+schema: '2.0'
+stages:
+  stage_01_data_ingestion:
+    cmd: python src/Object_Detection/pipeline/data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      md5: 73832407825247f890e235f8851349b2
+      size: 724
+    - path: src/Object_Detection/pipeline/data_ingestion.py
+      md5: 3b8f7d6514e754fff3ecb35c0f9d477c
+      size: 791
+    outs:
+    - path: src/Object_Detection/artifact_dir/data_ingestion
+      md5: e43f2c8219589e8d62499090990d328b.dir
+      size: 30747285
+      nfiles: 602
+  stage_02_prepare_base_model:
+    cmd: python src/Object_Detection/pipeline/prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      md5: 73832407825247f890e235f8851349b2
+      size: 724
+    - path: src/Object_Detection/pipeline/prepare_base_model.py
+      md5: 4cf5490a295b239865e27fbdd6b28c8f
+      size: 764
+    outs:
+    - path: src/Object_Detection/artifact_dir/prepare_base_model
+      md5: b6d02a5d80bf025857a4606718c69318.dir
+      size: 1794281
+      nfiles: 144
+  stage_03_requirements_installing:
+    cmd: pip install -r src/Object_Detection/artifact_dir/prepare_base_model/base_model/requirements.txt
